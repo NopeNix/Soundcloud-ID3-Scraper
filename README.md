@@ -18,4 +18,4 @@ the most im portant thign is the Track id with a `-` infront of it, e.g. `-19557
 | Parameter | Mandatory | Description |
 | --- | --- | --- |
 |-MusicPath| x | Path to music e.g. `/data/music` |
-|-$SoundcloudClient_ID| x | SoundCloud Client ID get it from browser session is easily findable |
+|-SoundcloudClient_ID| x | SoundCloud Client ID get it from browser session is easily findable |

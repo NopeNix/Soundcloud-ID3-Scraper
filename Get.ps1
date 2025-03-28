@@ -74,17 +74,18 @@ $Tracklist | ForEach-Object -Parallel {
             $file.Tag.Genres = $_.TrackInfo.genre
             #$file.Tag.Track = 1
             #$file.Tag.Comment = "This is a comment."
+            if ($null -ne $_.Trackinfo.artwork_url -and $_.Trackinfo.artwork_url -ne "") {
+                # Load the image file and create a Picture object
+                $imageData = [System.IO.File]::ReadAllBytes(($using:PSScriptRoot + "/img/" + $_.TrackID + ".jpg"))
+                $picture = New-Object TagLib.Picture
+                $picture.Data = $imageData
+                $picture.MimeType = "image/jpeg"  # Change to "image/png" if using a PNG
+                $picture.Type = [TagLib.PictureType]::FrontCover  # Type of picture (e.g., Front Cover)
 
-            # Load the image file and create a Picture object
-            $imageData = [System.IO.File]::ReadAllBytes(($using:PSScriptRoot + "/img/" + $_.TrackID + ".jpg"))
-            $picture = New-Object TagLib.Picture
-            $picture.Data = $imageData
-            $picture.MimeType = "image/jpeg"  # Change to "image/png" if using a PNG
-            $picture.Type = [TagLib.PictureType]::FrontCover  # Type of picture (e.g., Front Cover)
-
-            # Clear existing pictures (optional) and add the new one
-            $file.Tag.Pictures = @()
-            $file.Tag.Pictures += $picture
+                # Clear existing pictures (optional) and add the new one
+                $file.Tag.Pictures = @()
+                $file.Tag.Pictures += $picture
+            }
 
             # Save the changes
             $file.Save()
