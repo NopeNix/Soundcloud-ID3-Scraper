@@ -25,6 +25,7 @@ Write-Host ""
 
 
 Write-Host ("Getting Track Infos from Soundcloud...") -ForegroundColor Blue
+New-Item -ItemType Directory -Path ($PSScriptRoot + "/img/") -ErrorAction SilentlyContinue
 $Tracklist | ForEach-Object -Parallel {
     $CurrentTrack = $_
     try {
